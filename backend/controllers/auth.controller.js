@@ -89,8 +89,10 @@ export const logout = (req, res) => {
     res.cookie('jwt', '', { maxAge: 0 })
     res.status(200).json({ message: 'Выход из системы успешно' })
   } catch (error) {
-    console.log('Ошибка в контроллере регистрации', chalk.red(error.message))
-    console.log('Ошибка в контроллере выхода из системы', error.message)
+    console.log(
+      'Ошибка в контроллере выхода из системы',
+      chalk.red(error.message)
+    )
     res.status(500).json({ error: 'Внутренняя ошибка сервера' })
   }
 }
