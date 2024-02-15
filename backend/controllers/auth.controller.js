@@ -79,7 +79,7 @@ export const login = async (req, res) => {
       profilePic: user.profilePic
     })
   } catch (error) {
-    console.log('Ошибка в контроллере входа', error.message)
+    console.log('Ошибка в контроллере входа', chalk.red(error.message))
     res.status(500).json({ error: 'Внутренняя ошибка сервера' })
   }
 }

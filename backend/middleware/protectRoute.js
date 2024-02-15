@@ -3,7 +3,7 @@ import User from '../models/user.model.js'
 
 const protectRoute = async (req, res, next) => {
   try {
-    const token = req.cookies.jwt
+    const token = req.cookies.jwt // Нужна cookie-parser для получения из cookie jwt, разместить там же где и для req, В server.js
 
     if (!token) {
       return res
@@ -12,7 +12,7 @@ const protectRoute = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-
+    console.log('decoded: ', chalk.red(decoded))
     if (!decoded) {
       return res.status(401).json({ error: 'Unauthorized – неверный токен' })
     }
