@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import User from '../models/user.model.js'
-// import generateTokenAndSetCookie from '../utils/generateToken.js'
+import generateTokenAndSetCookie from '../utils/generateToken.js'
 import chalk from 'chalk'
 
 // просто так мы не можем получить данные из request, нужно промежуточное по
@@ -35,11 +35,9 @@ export const signup = async (req, res) => {
       profilePic: gender === 'male' ? boyProfilePic : girlProfilePic
     })
 
-    // console.log(chalk.yellow(newUser))
-
     if (newUser) {
       // Generate JWT token here
-      // generateTokenAndSetCookie(newUser._id, res)
+      generateTokenAndSetCookie(newUser._id, res)
       await newUser.save()
 
       res.status(201).json({
@@ -57,42 +55,45 @@ export const signup = async (req, res) => {
   }
 }
 
-// export const login = async (req, res) => {
-//   try {
-//     const { username, password } = req.body
-//     const user = await User.findOne({ username })
-//     const isPasswordCorrect = await bcrypt.compare(
-//       password,
-//       user?.password || ''
-//     )
+export const login = async (req, res) => {
+  try {
+    const { username, password } = req.body
+    const user = await User.findOne({ username })
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user?.password || ''
+    )
 
-//     if (!user || !isPasswordCorrect) {
-//       return res.status(400).json({ error: 'Invalid username or password' })
-//     }
+    if (!user || !isPasswordCorrect) {
+      return res
+        .status(400)
+        .json({ error: 'Неправильное имя пользователя или пароль' })
+    }
 
-//     generateTokenAndSetCookie(user._id, res)
+    generateTokenAndSetCookie(user._id, res)
 
-//     res.status(200).json({
-//       _id: user._id,
-//       fullName: user.fullName,
-//       username: user.username,
-//       profilePic: user.profilePic
-//     })
-//   } catch (error) {
-//     console.log('Error in login controller', error.message)
-//     res.status(500).json({ error: 'Internal Server Error' })
-//   }
-// }
+    res.status(200).json({
+      _id: user._id,
+      fullName: user.fullName,
+      username: user.username,
+      profilePic: user.profilePic
+    })
+  } catch (error) {
+    console.log('Ошибка в контроллере входа', error.message)
+    res.status(500).json({ error: 'Внутренняя ошибка сервера' })
+  }
+}
 
-// export const logout = (req, res) => {
-//   try {
-//     res.cookie('jwt', '', { maxAge: 0 })
-//     res.status(200).json({ message: 'Logged out successfully' })
-//   } catch (error) {
-//     console.log('Error in logout controller', error.message)
-//     res.status(500).json({ error: 'Internal Server Error' })
-//   }
-// }
+export const logout = (req, res) => {
+  try {
+    res.cookie('jwt', '', { maxAge: 0 })
+    res.status(200).json({ message: 'Выход из системы успешно' })
+  } catch (error) {
+    console.log('Ошибка в контроллере регистрации', chalk.red(error.message))
+    console.log('Ошибка в контроллере выхода из системы', error.message)
+    res.status(500).json({ error: 'Внутренняя ошибка сервера' })
+  }
+}
 
 // import chalk from 'chalk'
 
