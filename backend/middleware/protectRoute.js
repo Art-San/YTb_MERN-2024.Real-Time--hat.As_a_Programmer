@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/user.model.js'
+import chalk from 'chalk'
 
 const protectRoute = async (req, res, next) => {
   try {
@@ -12,7 +13,7 @@ const protectRoute = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    console.log('decoded: ', chalk.red(decoded))
+    console.log('decoded: ', chalk.red(decoded.userId))
     if (!decoded) {
       return res.status(401).json({ error: 'Unauthorized – неверный токен' })
     }

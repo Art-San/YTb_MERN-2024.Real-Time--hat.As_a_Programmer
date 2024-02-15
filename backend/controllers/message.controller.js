@@ -8,6 +8,37 @@ export const sendMessage = async (req, res) => {
     const { message } = req.body
     const { id: receiverId } = req.params
     const senderId = req.user._id
+
+    console.log('senderId: ', chalk.gray(senderId))
+    console.log('receiverId: ', chalk.green(receiverId))
+
+    let conversation = await Conversation.findOne({
+      participants: { $all: [senderId, receiverId] }
+    })
+
+    if (!conversation) {
+      conversation = await Conversation.create({
+        participants: [senderId, receiverId]
+      })
+    }
+
+    const newMessage = new Message({
+      senderId,
+      receiverId,
+      message
+    })
+
+    if (newMessage) {
+      conversation.messages.push(newMessage._id)
+    }
+
+    // await conversation.save()
+    // await newMessage.save()
+
+    // это будет работать параллельно
+    await Promise.all([conversation.save(), newMessage.save()])
+
+    res.status(201).json(newMessage)
   } catch (error) {
     console.log('Ошибка в контроллере sendMessage: ', chalk.red(error.message))
     res.status(500).json({ error: 'Internal server error' })
