@@ -1,4 +1,5 @@
 import User from '../models/user.model.js'
+import chalk from 'chalk'
 
 export const getUsersForSidebar = async (req, res) => {
   try {
@@ -10,7 +11,7 @@ export const getUsersForSidebar = async (req, res) => {
 
     res.status(200).json(filteredUsers)
   } catch (error) {
-    console.error('Error in getUsersForSidebar: ', error.message)
+    console.log('Ошибка в getUsersForSidebar: ', chalk.red(error.message))
     res.status(500).json({ error: 'Internal server error' })
   }
 }
