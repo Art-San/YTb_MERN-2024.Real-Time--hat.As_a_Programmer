@@ -45,7 +45,7 @@ export const sendMessage = async (req, res) => {
     res.status(201).json(newMessage)
   } catch (error) {
     console.log('Ошибка в контроллере sendMessage: ', chalk.red(error.message))
-    res.status(500).json({ error: 'Internal server error' })
+    res.status(500).json({ error: 'Внутренняя ошибка сервера-Бек' })
   }
 }
 
@@ -64,7 +64,7 @@ export const getMessages = async (req, res) => {
 
     res.status(200).json(messages)
   } catch (error) {
-    console.log('Error in getMessages controller: ', error.message)
-    res.status(500).json({ error: 'Internal server error' })
+    console.log('Ошибка в контроллере getMessages: ', error.message)
+    res.status(500).json({ error: 'Внутренняя ошибка сервера-Бек' })
   }
 }

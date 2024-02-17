@@ -9,13 +9,13 @@ export const signup = async (req, res) => {
     const { fullName, username, password, confirmPassword, gender } = req.body
     // 34:06
     if (password !== confirmPassword) {
-      return res.status(400).json({ error: 'Пароли не совпадают' })
+      return res.status(400).json({ error: 'Пароли не совпадают-Бек' })
     }
 
     const user = await User.findOne({ username })
 
     if (user) {
-      return res.status(400).json({ error: 'Имя пользователя уже занято' })
+      return res.status(400).json({ error: 'Имя пользователя уже занято-Бек' })
     }
 
     // HASH PASSWORD HERE
@@ -38,7 +38,7 @@ export const signup = async (req, res) => {
     if (newUser) {
       // Generate JWT token here
       generateTokenAndSetCookie(newUser._id, res)
-      await newUser.save()
+      // await newUser.save()
 
       res.status(201).json({
         _id: newUser._id,
@@ -47,11 +47,11 @@ export const signup = async (req, res) => {
         profilePic: newUser.profilePic
       })
     } else {
-      res.status(400).json({ error: 'Неверные данные пользователя' })
+      res.status(400).json({ error: 'Неверные данные пользователя-Бек' })
     }
   } catch (error) {
     console.log('Ошибка в контроллере регистрации', chalk.red(error.message))
-    res.status(500).json({ error: 'Внутренняя ошибка сервера' })
+    res.status(500).json({ error: 'Внутренняя ошибка сервера-Бек' })
   }
 }
 
@@ -67,7 +67,7 @@ export const login = async (req, res) => {
     if (!user || !isPasswordCorrect) {
       return res
         .status(400)
-        .json({ error: 'Неправильное имя пользователя или пароль' })
+        .json({ error: 'Неправильное имя пользователя или пароль-Бек' })
     }
 
     generateTokenAndSetCookie(user._id, res)
@@ -80,20 +80,20 @@ export const login = async (req, res) => {
     })
   } catch (error) {
     console.log('Ошибка в контроллере входа', chalk.red(error.message))
-    res.status(500).json({ error: 'Внутренняя ошибка сервера' })
+    res.status(500).json({ error: 'Внутренняя ошибка сервера-Бек' })
   }
 }
 
 export const logout = (req, res) => {
   try {
     res.cookie('jwt', '', { maxAge: 0 })
-    res.status(200).json({ message: 'Выход из системы успешно' })
+    res.status(200).json({ message: 'Выход из системы успешно-Бек' })
   } catch (error) {
     console.log(
       'Ошибка в контроллере выхода из системы',
       chalk.red(error.message)
     )
-    res.status(500).json({ error: 'Внутренняя ошибка сервера' })
+    res.status(500).json({ error: 'Внутренняя ошибка сервера-Бек' })
   }
 }
 

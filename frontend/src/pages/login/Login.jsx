@@ -2,6 +2,8 @@
 // import { Link } from "react-router-dom";
 // import useLogin from "../../hooks/useLogin";
 
+import { Link } from 'react-router-dom'
+
 // const Login = () => {
 // 	const [username, setUsername] = useState("");
 // 	const [password, setPassword] = useState("");
@@ -95,12 +97,12 @@ const Login = () => {
               className="w-full input input-bordered h-10"
             />
           </div>
-          <a
-            href="#"
+          <Link
+            to="/signup"
             className="text-sm  hover:underline hover:text-blue-600 mt-2 inline-block"
           >
             {"Don't"} have an account?
-          </a>
+          </Link>
 
           <div>
             <button className="btn btn-block btn-sm mt-2">Login</button>
