@@ -5,7 +5,7 @@ import Login from './pages/login/Login'
 import SignUp from './pages/signup/SignUp'
 import { Toaster } from 'react-hot-toast'
 import { useAuthContext } from './context/AuthContext'
-
+// 3:12:00 zustand
 function App() {
   const { authUser } = useAuthContext()
   return (
