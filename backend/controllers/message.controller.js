@@ -5,6 +5,9 @@ import chalk from 'chalk'
 
 export const sendMessage = async (req, res) => {
   try {
+    console.log('req', req)
+    console.log('req.user', req.user)
+    console.log('req', req.user._id)
     const { message } = req.body
     const { id: receiverId } = req.params
     const senderId = req.user._id
