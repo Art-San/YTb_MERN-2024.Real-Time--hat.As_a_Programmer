@@ -1,6 +1,7 @@
 import { Server } from 'socket.io'
 import http from 'http'
 import express from 'express'
+import chalk from 'chalk'
 
 const app = express()
 
@@ -19,7 +20,7 @@ export const getReceiverSocketId = (receiverId) => {
 const userSocketMap = {} // {userId: socketId}
 
 io.on('connection', (socket) => {
-  console.log('a user connected', socket.id)
+  console.log('a user connected', chalk.yellow(socket.id))
 
   const userId = socket.handshake.query.userId
   if (userId != 'undefined') userSocketMap[userId] = socket.id
@@ -29,7 +30,7 @@ io.on('connection', (socket) => {
 
   // socket.on() используется для прослушивания событий. может использоваться как на стороне клиента, так и на стороне сервера
   socket.on('disconnect', () => {
-    console.log('user disconnected', socket.id)
+    console.log('user disconnected', chalk.yellow(socket.id))
     delete userSocketMap[userId]
     io.emit('getOnlineUsers', Object.keys(userSocketMap))
   })

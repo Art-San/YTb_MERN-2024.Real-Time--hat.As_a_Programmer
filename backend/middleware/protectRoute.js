@@ -13,7 +13,7 @@ const protectRoute = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    console.log('decoded: ', chalk.red(decoded.userId))
+
     if (!decoded) {
       return res.status(401).json({ error: 'Unauthorized – неверный токен' })
     }
