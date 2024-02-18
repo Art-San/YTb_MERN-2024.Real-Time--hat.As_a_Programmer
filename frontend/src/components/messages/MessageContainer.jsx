@@ -7,7 +7,7 @@ import { useAuthContext } from '../../context/AuthContext'
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation()
-  console.log('selectedConversation', selectedConversation)
+  console.log('selectedConversation._id', selectedConversation?._id)
 
   useEffect(() => {
     // функция очистки (размонтирует). Без этой функции если разлогиниться,  то сохраняется последний выбранный юзер

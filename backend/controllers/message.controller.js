@@ -35,7 +35,7 @@ export const sendMessage = async (req, res) => {
     // await conversation.save();
     // await newMessage.save();
 
-    // this will run in parallel
+    // это будет работать параллельно
     await Promise.all([conversation.save(), newMessage.save()])
 
     // SOCKET IO FUNCTIONALITY WILL GO HERE
