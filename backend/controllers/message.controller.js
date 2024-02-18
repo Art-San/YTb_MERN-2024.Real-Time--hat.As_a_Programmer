@@ -5,9 +5,6 @@ import chalk from 'chalk'
 
 export const sendMessage = async (req, res) => {
   try {
-    console.log('req', req)
-    console.log('req.user', req.user)
-    console.log('req', req.user._id)
     const { message } = req.body
     const { id: receiverId } = req.params
     const senderId = req.user._id
@@ -39,11 +36,11 @@ export const sendMessage = async (req, res) => {
     await Promise.all([conversation.save(), newMessage.save()])
 
     // SOCKET IO FUNCTIONALITY WILL GO HERE
-    // const receiverSocketId = getReceiverSocketId(receiverId)
-    // if (receiverSocketId) {
-    //   // io.to(<socket_id>).emit() used to send events to specific client
-    //   io.to(receiverSocketId).emit('newMessage', newMessage)
-    // }
+    const receiverSocketId = getReceiverSocketId(receiverId)
+    if (receiverSocketId) {
+      // io.to(<socket_id>).emit() используется для отправки событий конкретному клиенту
+      io.to(receiverSocketId).emit('newMessage', newMessage)
+    }
 
     res.status(201).json(newMessage)
   } catch (error) {
