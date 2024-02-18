@@ -70,6 +70,11 @@ const Login = () => {
 }
 export default Login
 
+// function Controls() {
+//   const increasePopulation = useStore((state) => state.increasePopulation)
+//   return <button onClick={increasePopulation}>one up</button>
+// }
+
 // STARTER CODE FOR THIS FILE
 // import { Link } from 'react-router-dom'
 // const Login = () => {

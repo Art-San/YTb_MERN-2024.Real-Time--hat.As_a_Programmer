@@ -5,6 +5,7 @@ import Login from './pages/login/Login'
 import SignUp from './pages/signup/SignUp'
 import { Toaster } from 'react-hot-toast'
 import { useAuthContext } from './context/AuthContext'
+import Test from './pages/test/Test'
 // 3:12:00 zustand
 function App() {
   const { authUser } = useAuthContext()
@@ -23,6 +24,7 @@ function App() {
           path="/signup"
           element={authUser ? <Navigate to="/" /> : <SignUp />}
         />
+        <Route path="/test" element={<Test />} />
       </Routes>
       <Toaster />
     </div>
