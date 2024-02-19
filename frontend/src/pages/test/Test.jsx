@@ -21,16 +21,16 @@ const Test = () => {
           {price} RUB...
         </h1>
         <button className="btn btn-block btn-sm mt-2" onClick={handleIncrement}>
-          one up
+          Plus
         </button>
         <button
           className="btn btn-block btn-sm mt-2 bg-slate-500"
           onClick={handleRemove}
         >
-          one up
+          Zero
         </button>
         <button className="btn btn-block btn-sm mt-2" onClick={handleDecrement}>
-          one up
+          Minus
         </button>
       </div>
     </>
