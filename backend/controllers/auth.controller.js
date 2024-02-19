@@ -96,26 +96,3 @@ export const logout = (req, res) => {
     res.status(500).json({ error: 'Внутренняя ошибка сервера-Бек' })
   }
 }
-
-// import chalk from 'chalk'
-
-// export const signup = (req, res) => {
-//   console.log(chalk.bgGray('signUpUse'))
-//   res.send('Ну вот ты и зарегистрировался')
-// }
-// export const login = (req, res) => {
-//   console.log(chalk.bgGray('loginUser'))
-//   res.send('Ну вот ты и вошел')
-// }
-// export const logout = (req, res) => {
-//   console.log(chalk.bgGray('logoutUser'))
-//   res.send('Ну вот ты и вышел')
-// }
-
-// {
-//   "fullName": "Art",
-//   "username": "Alex",
-//   "password": "123456",
-//   "confirmPassword": "123456",
-//   "gender": "male"
-// }

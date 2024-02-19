@@ -4,7 +4,7 @@ import chalk from 'chalk'
 
 const protectRoute = async (req, res, next) => {
   try {
-    const token = req.cookies.jwt // Нужна cookie-parser для получения из cookie jwt, разместить там же где и для req, В server.js
+    const token = req.cookies.jwt // Нужен cookie-parser для получения из cookie jwt, разместить там же где и для req, В server.js
 
     if (!token) {
       return res
